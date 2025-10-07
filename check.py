@@ -158,56 +158,116 @@ print("="*70)
 total_checks = len(checks_passed) + len(checks_failed)
 passed_count = len(checks_passed)
 
-print(f"\n✅ PASSED ({passed_count} checks):")
-for check in checks_passed:
-    print(f"   ✓ {check}")
+# Calculate percentage
+percentage = (passed_count / total_checks * 100) if total_checks > 0 else 0
 
+# Score display
+print(f"\n📊 SCORE: {passed_count}/{total_checks} checks passed ({percentage:.0f}%)")
+print("─" * 70)
+
+# Progress bar
+bar_length = 50
+filled = int(bar_length * passed_count / total_checks) if total_checks > 0 else 0
+bar = "█" * filled + "░" * (bar_length - filled)
+print(f"   [{bar}] {percentage:.0f}%")
+print()
+
+# Passed checks
+if checks_passed:
+    print("✅ PASSED CHECKS:")
+    print("─" * 70)
+    for i, check in enumerate(checks_passed, 1):
+        print(f"   {i}. ✓ {check}")
+    print()
+
+# Failed checks
 if checks_failed:
-    print(f"\n❌ FAILED ({len(checks_failed)} checks):")
-    for check in checks_failed:
-        print(f"   ✗ {check}")
-
-print(f"\n📊 SCORE: {passed_count}/{total_checks} checks passed")
+    print("❌ FAILED CHECKS:")
+    print("─" * 70)
+    for i, check in enumerate(checks_failed, 1):
+        print(f"   {i}. ✗ {check}")
+    print()
 
 # Final verdict
-print("\n" + "="*70)
+print("="*70)
 if len(checks_failed) == 0:
     print("   ✅ ALL AUTOMATED CHECKS PASSED!")
     print("="*70)
-    print("\n🎉 Good news! All automated checks passed.")
-    print("\n⚠️  However, you MUST manually verify:")
-    print(f"   1. Email '{email}' is VERIFIED at:")
-    print("      → https://github.com/settings/emails")
-    print("      → Must have green checkmark ✓")
-    print("\n   2. If repository is PRIVATE, enable:")
-    print("      → https://github.com/settings/profile")
-    print("      → Check ☑️ 'Include private contributions'")
-    print("\n   3. Wait 24-48 hours for stats to fully update")
-    print("      → Graph updates: 5-30 minutes")
-    print("      → Total stats: 24-48 HOURS")
+    print()
+    print("   ╔════════════════════════════════════════════════════════╗")
+    print("   ║  🎉 CONGRATULATIONS! All automated checks passed!      ║")
+    print("   ╚════════════════════════════════════════════════════════╝")
+    print()
+    print("⚠️  MANUAL VERIFICATION REQUIRED:")
+    print("─" * 70)
+    print()
+    print("   📧 STEP 1: Verify Email")
+    print(f"      • Your email: {email}")
+    print("      • Visit: https://github.com/settings/emails")
+    print("      • Ensure green checkmark ✓ next to your email")
+    print()
+    print("   🔒 STEP 2: Check Private Contributions (if private repo)")
+    print("      • Visit: https://github.com/settings/profile")
+    print("      • Find: 'Contributions & Activity'")
+    print("      • Enable: ☑️ 'Include private contributions'")
+    print()
+    print("   ⏰ STEP 3: Wait for GitHub to Update")
+    print("      • Contribution graph: 5-30 minutes")
+    print("      • Total statistics: 24-48 HOURS ⚠️")
+    print("      • Be patient! GitHub needs time to recalculate")
 else:
     print("   ⚠️  SOME CHECKS FAILED - ACTION REQUIRED!")
     print("="*70)
-    print("\n❌ Please fix the issues above first.")
-    print("   Run this script again after making changes.")
+    print()
+    print("   ╔════════════════════════════════════════════════════════╗")
+    print(f"   ║  ❌ {len(checks_failed)} CHECK(S) FAILED - Please fix the issues above  ║")
+    print("   ╚════════════════════════════════════════════════════════╝")
+    print()
+    print("📝 NEXT STEPS:")
+    print("─" * 70)
+    print("   1. Review the failed checks above")
+    print("   2. Apply the suggested fixes")
+    print("   3. Run this script again to verify")
+    print("   4. Repeat until all checks pass")
 
-print("\n" + "="*70)
-print("   MANUAL CHECKLIST")
+print()
 print("="*70)
-print("  ☐ Email is VERIFIED in GitHub (check manually!)")
-print("  ☐ On DEFAULT branch (main/master)")  
-print("  ☐ 'Include private contributions' ON (if private repo)")
-print("  ☐ Waited 24-48 hours for stats update")
+print("   📋 MANUAL CHECKLIST")
 print("="*70)
-
-# Summary
-print("\n💡 Quick Summary:")
+print()
 if len(checks_failed) == 0:
-    print("   → All automated checks passed ✅")
-    print("   → Verify email manually in GitHub ⚠️")
-    print("   → Wait 24-48 hours for stats ⏰")
+    print("   ☑  Email configured in Git")
+    print("   ☑  On default branch")
+    print("   ☑  Changes pushed to GitHub")
 else:
-    print(f"   → Fix {len(checks_failed)} issue(s) above ❌")
-    print("   → Then run this script again 🔄")
+    for check in checks_passed:
+        print(f"   ☑  {check}")
+    for check in checks_failed:
+        print(f"   ☐  {check} ❌")
 
-print("\n" + "="*70)
+print()
+print("   ☐  Email VERIFIED in GitHub (manual check required!)")
+print("   ☐  'Include private contributions' ON (if private repo)")
+print("   ☐  Waited 24-48 hours for stats to update")
+print()
+print("="*70)
+
+# Summary box
+print()
+print("╔════════════════════════════════════════════════════════════════╗")
+print("║                       💡 QUICK SUMMARY                         ║")
+print("╠════════════════════════════════════════════════════════════════╣")
+
+if len(checks_failed) == 0:
+    print("║  Status:    ✅ All automated checks PASSED                    ║")
+    print("║  Action:    ⚠️  Verify email manually in GitHub               ║")
+    print("║  Wait:      ⏰ 24-48 hours for stats to update                ║")
+    print("║  Progress:  🟢 Ready for manual verification                 ║")
+else:
+    print(f"║  Status:    ❌ {len(checks_failed)} check(s) FAILED                              ║")
+    print(f"║  Action:    🔧 Fix issues above                               ║")
+    print(f"║  Next:      🔄 Run script again after fixes                   ║")
+    print(f"║  Progress:  🟡 Needs attention                                ║")
+
+print("╚════════════════════════════════════════════════════════════════╝")
+print()
