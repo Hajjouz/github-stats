@@ -1,6 +1,6 @@
 # GitHub Contributions Checker
 
-Diagnostic tool to troubleshoot why your GitHub contributions are not showing up in your profile statistics, even though they appear in the contribution graph.
+A simple Python diagnostic tool to troubleshoot why your GitHub contributions are not showing up in your profile statistics, even though they appear in the contribution graph.
 
 ## 🎯 Problem This Solves
 
@@ -16,12 +16,17 @@ Have you ever experienced this frustrating situation?
 ## 🌟 Features
 
 ✅ **Automated Checks** - Runs 5+ critical checks automatically  
-✅ **Scoring System** - Shows exactly what passed and what failed  
+✅ **Scoring System** - Shows exactly what passed and what failed with percentage  
+✅ **Progress Bar** - Visual progress indicator with 50-character bar  
+✅ **Visual Boxes** - Professional boxed messages with borders (╔═══╗)  
+✅ **Numbered Lists** - Clear numbered output for passed/failed checks  
 ✅ **Clear Solutions** - Provides actionable fixes for each issue  
 ✅ **Email Verification** - Checks if commits use the correct email  
 ✅ **Branch Detection** - Verifies you're on the default branch  
 ✅ **Push Status** - Confirms changes are synced with GitHub  
-✅ **Manual Checklist** - Lists items that need manual verification  
+✅ **Visual Checkboxes** - Clear ☑/☐ indicators for completed/pending items  
+✅ **Summary Box** - Professional summary with status, action, and progress  
+✅ **Step-by-Step Guide** - Detailed manual verification steps  
 
 ## 📋 Requirements
 
@@ -98,39 +103,66 @@ python3 check.py
    VERIFICATION STATUS
 ======================================================================
 
-✅ PASSED (6 checks):
-   ✓ Email configured in git
-   ✓ On default branch
-   ✓ Commits use correct email
-   ✓ Commits exist
-   ✓ Repository is on GitHub
-   ✓ Changes pushed to GitHub
+📊 SCORE: 6/6 checks passed (100%)
+──────────────────────────────────────────────────────────────────────
+   [██████████████████████████████████████████████████] 100%
 
-📊 SCORE: 6/6 checks passed
+✅ PASSED CHECKS:
+──────────────────────────────────────────────────────────────────────
+   1. ✓ Email configured in git
+   2. ✓ On default branch
+   3. ✓ Commits use correct email
+   4. ✓ Commits exist
+   5. ✓ Repository is on GitHub
+   6. ✓ Changes pushed to GitHub
 
 ======================================================================
    ✅ ALL AUTOMATED CHECKS PASSED!
 ======================================================================
 
-🎉 Good news! All automated checks passed.
+   ╔════════════════════════════════════════════════════════╗
+   ║  🎉 CONGRATULATIONS! All automated checks passed!      ║
+   ╚════════════════════════════════════════════════════════╝
 
-⚠️  However, you MUST manually verify:
-   1. Email 'john.doe@example.com' is VERIFIED at:
-      → https://github.com/settings/emails
-      → Must have green checkmark ✓
+⚠️  MANUAL VERIFICATION REQUIRED:
+──────────────────────────────────────────────────────────────────────
 
-   2. If repository is PRIVATE, enable:
-      → https://github.com/settings/profile
-      → Check ☑️ 'Include private contributions'
+   📧 STEP 1: Verify Email
+      • Your email: john.doe@example.com
+      • Visit: https://github.com/settings/emails
+      • Ensure green checkmark ✓ next to your email
 
-   3. Wait 24-48 hours for stats to fully update
-      → Graph updates: 5-30 minutes
-      → Total stats: 24-48 HOURS
+   🔒 STEP 2: Check Private Contributions (if private repo)
+      • Visit: https://github.com/settings/profile
+      • Find: 'Contributions & Activity'
+      • Enable: ☑️ 'Include private contributions'
 
-💡 Quick Summary:
-   → All automated checks passed ✅
-   → Verify email manually in GitHub ⚠️
-   → Wait 24-48 hours for stats ⏰
+   ⏰ STEP 3: Wait for GitHub to Update
+      • Contribution graph: 5-30 minutes
+      • Total statistics: 24-48 HOURS ⚠️
+      • Be patient! GitHub needs time to recalculate
+
+======================================================================
+   � MANUAL CHECKLIST
+======================================================================
+
+   ☑  Email configured in Git
+   ☑  On default branch
+   ☑  Changes pushed to GitHub
+   ☐  Email VERIFIED in GitHub (manual check required!)
+   ☐  'Include private contributions' ON (if private repo)
+   ☐  Waited 24-48 hours for stats to update
+
+======================================================================
+
+╔════════════════════════════════════════════════════════════════╗
+║                       💡 QUICK SUMMARY                         ║
+╠════════════════════════════════════════════════════════════════╣
+║  Status:    ✅ All automated checks PASSED                    ║
+║  Action:    ⚠️  Verify email manually in GitHub               ║
+║  Wait:      ⏰ 24-48 hours for stats to update                ║
+║  Progress:  🟢 Ready for manual verification                 ║
+╚════════════════════════════════════════════════════════════════╝
 ```
 
 ## 🔍 What Gets Checked
@@ -256,11 +288,22 @@ It's important to understand GitHub's update schedule:
 
 ## 📊 Scoring System
 
-The tool provides a score based on automated checks:
+The tool provides a comprehensive scoring system with visual indicators:
 
 ```
-📊 SCORE: 6/6 checks passed
+📊 SCORE: 6/6 checks passed (100%)
+──────────────────────────────────────────────────────────────────────
+   [██████████████████████████████████████████████████] 100%
 ```
+
+**Visual Elements:**
+
+- **Progress Bar** - 50-character bar showing pass percentage (█ = passed, ░ = failed)
+- **Percentage Score** - Exact percentage of passed checks
+- **Numbered Lists** - Clear enumeration of passed and failed checks
+- **Visual Boxes** - Professional bordered messages (╔═══╗ characters)
+- **Checkboxes** - ☑ for completed items, ☐ for pending items
+- **Color Indicators** - 🟢 (ready), 🟡 (needs attention), 🔴 (failed)
 
 **What Each Check Means:**
 
@@ -271,7 +314,53 @@ The tool provides a score based on automated checks:
 - ✅ **Repository is on GitHub** - Not GitLab/Bitbucket
 - ✅ **Changes pushed to GitHub** - Visible to GitHub
 
-## 🎯 Manual Verification Checklist
+## � Output Formatting
+
+The tool uses professional formatting for easy reading:
+
+### Progress Bar
+```
+[██████████████████████████████████████████████████] 100%
+[███████████████████████████░░░░░░░░░░░░░░░░░░░░░░░] 60%
+[████████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 25%
+```
+
+### Visual Boxes
+```
+╔════════════════════════════════════════════════════════╗
+║  🎉 CONGRATULATIONS! All automated checks passed!      ║
+╚════════════════════════════════════════════════════════╝
+```
+
+### Numbered Lists
+```
+✅ PASSED CHECKS:
+   1. ✓ Email configured in git
+   2. ✓ On default branch
+   3. ✓ Changes pushed to GitHub
+```
+
+### Checkboxes
+```
+☑  Email configured in Git
+☑  On default branch
+☐  Email VERIFIED in GitHub (manual check required!)
+☐  Waited 24-48 hours for stats to update
+```
+
+### Summary Box
+```
+╔════════════════════════════════════════════════════════════════╗
+║                       💡 QUICK SUMMARY                         ║
+╠════════════════════════════════════════════════════════════════╣
+║  Status:    ✅ All automated checks PASSED                    ║
+║  Action:    ⚠️  Verify email manually in GitHub               ║
+║  Wait:      ⏰ 24-48 hours for stats to update                ║
+║  Progress:  🟢 Ready for manual verification                 ║
+╚════════════════════════════════════════════════════════════════╝
+```
+
+## �🎯 Manual Verification Checklist
 
 After running the tool, manually verify these items:
 
@@ -463,7 +552,7 @@ This tool helps developers:
 
 **Last Updated:** October 2025
 
-**Version:** 1.0.0
+**Version:** 2.0.0 - Enhanced with professional visual formatting
 
 ---
 
